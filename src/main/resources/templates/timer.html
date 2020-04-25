@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <link href = "css/styles.css" rel = "stylesheet"/>
+    <script src="/webjars/jquery/3.5.0/jquery.min.js"></script>
+
+    <title>Focus Meadow</title>
+</head>
+<body>
+    <h4>Welcome to Focus Meadow!!</h4>
+    <h4 id="timerText" th:text="${workTimer.getTime()}"></h4>
+    <input id="timerTypeWork" type="radio" name="timerType" checked="true" onclick="setTimerTextWork()"> work
+    <input id="inputWorkTime" type="number" th:placeholder="${workTimer.getTime()}"/><br/>
+    <input id="timerTypePause" type="radio" name="timerType" onclick="setTimerTextPause()"> pause
+    <input id="inputPauseTime" type="number" th:placeholder="${pauseTimer.getTime()}"/><br/>
+    <button id="startButton" onclick="setTimer()" >Start</button>
+    <button id="stopButton" onclick="stopTimer()" disabled = true>Stop</button>
+
+    <script>
+        const defaultTimeWork = "[[${workTimer.time}]]";
+        const defaultTimePause = "[[${pauseTimer.time}]]";
+    </script>
+    <script src="javascript/timerScript.js"></script>
+</body>
+</html>
