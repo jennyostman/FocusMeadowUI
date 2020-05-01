@@ -1,3 +1,20 @@
 h4 {
     color: red;
 }
+
+label {
+    display: inline-block;
+    width: 100px;
+    margin: 5px;
+    text-align: left;
+}
+
+input[type=text], input[type=password] {
+    display: inline-block;
+    width: 200px;
+}
+
+button {
+    padding: 5px;
+    margin: 10px;
+}
