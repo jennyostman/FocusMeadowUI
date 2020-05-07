@@ -15,7 +15,7 @@ public class LogInUserClient {
     private final String userHost;
 
     @Autowired
-    public LogInUserClient(RestTemplate restTemplate, @Value("http://localhost:8082") final String userHost) {
+    public LogInUserClient(RestTemplate restTemplate, @Value("${userHost}") final String userHost) {
         this.restTemplate = restTemplate;
         this.userHost = userHost;
     }

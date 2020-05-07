@@ -1,11 +1,117 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
-    <link rel="stylesheet" href="css/styles.css">
+    <link href = "webjars/bootstrap/4.4.1-1/css/bootstrap.min.css" rel = "stylesheet"/>
+    <link href = "css/styles.css" rel = "stylesheet"/>
+    <script src="/webjars/jquery/3.5.0/jquery.min.js"></script>
+
+    <title>Focus Meadow</title>
 </head>
 <body>
-    <h1>Welcome to Focus Meadow!</h1>
+    <div class="container">
+        <div id="headerDiv" class="row">
+                <div class="col-md-3">
+                    <h4 id="userText" th:text="${user.getUserName()}"></h4>
+                </div>
+                <div class="col-md-2">
+                    <h4 id="totalTimeText">4h 20min</h4>
+                </div>
+                <div class="col-md-3">
+                    <img id="coinImg" src="images/sunflower.jpg">
+                    <label id="coinsText" for="coinImg">hej</label>
+
+                </div>
+
+                <div class="offset-2 col-md-2">
+                    <button id="logOutButton" class="btn btn-light">Log out</button>
+                </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-8">
+                <div class="row">
+                    <div id="timerDiv" class="col-md-6">
+                        <h1 id="timerText" class="text-center" th:text="${workTimer.getTime()}"></h1>
+
+                        <div class="row  timerRow">
+                            <div class="offset-2 col-md-3 form-check">
+                                <div class="custom-control custom-radio">
+                                    <input id="timerTypeWork" type="radio" class="custom-control-input" name="timerType" checked>
+                                    <label class="custom-control-label" for="timerTypeWork">work</label>
+                                </div>
+                            </div>
+
+                            <div class="col-md-4">
+                                <input id="inputWorkTime" type="number" class="form-control" th:placeholder="${workTimer.getTime()}"/>
+                            </div>
+                        </div>
+
+                        <div class="row timerRow">
+                            <div class="offset-2 col-md-3 form-check">
+                                <div class="custom-control custom-radio">
+                                    <input id="pauseTypeWork" type="radio" class="custom-control-input" name="timerType">
+                                    <label class="custom-control-label" for="pauseTypeWork">pause</label>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <input id="inputPauseTime" type="number" class="form-control" th:placeholder="${pauseTimer.getTime()}"/>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="offset-4">
+                                <button id="startButton" class="btn btn-light" onclick="setTimer()" >Start</button>
+                                <button id="stopButton" class="btn btn-light" onclick="stopTimer()" disabled>Stop</button>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <div id="meadowDiv" class="col-md-6 text-center">
+                            <tr th:each="flower : ${meadowFlowersList}">
+                                <img class="meadowFlowerImg" th:src="${flower.image}">
+                            </tr>
+                    </div>
+                </div>
+                <div class="row">
+                    <div id="shopDiv" class="col-md-12">
+                        shop
+                        <div id="shopFlowerDiv">
+                                <img id="shopFlowerImg" class="img-rounded" src="images/sunflower.jpg"></br>
+
+                            Solros
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="achievementsDiv" class="col-md-4">
+                <h4>Achievements</h4>
+                <div id="achievementDiv" class="row">
+                    <div class="col-md-3">
+                        <img id="achievementImg" src="images/sunflower.jpg">
+                    </div>
+
+                    <div class="col-md-3">
+                        Achievement
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div class="row">
+
+        </div>
+    </div>
+
+
+
+    <script>
+        const defaultTimeWork = "[[${workTimer.time}]]";
+        const defaultTimePause = "[[${pauseTimer.time}]]";
+    </script>
+    <script src="javascript/timerScript.js"></script>
+    <script src="webjars/bootstrap/4.4.1-1/js/bootstrap.min.js"></script>
 </body>
 </html>

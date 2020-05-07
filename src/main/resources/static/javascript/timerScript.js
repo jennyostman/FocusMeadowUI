@@ -55,6 +55,7 @@ function stopTimer() {
 
 function saveSession() {
     const result  = {
+        userId : "hej",
         time : inputTime,
         workType :  workType,
         interrupted : interrupted
