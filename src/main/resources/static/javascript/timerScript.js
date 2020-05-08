@@ -73,12 +73,16 @@ function saveSession() {
 
 function setTimerTextWork()
 {
-    document.querySelector('#timerText').textContent = defaultTimeWork;
+    document.querySelector('#timerText').textContent =
+        !document.querySelector('#inputWorkTime').value
+            ? defaultTimeWork : document.querySelector('#inputWorkTime').value;
 }
 
 function setTimerTextPause()
 {
-    document.querySelector('#timerText').textContent = defaultTimePause;
+    document.querySelector('#timerText').textContent =
+        !document.querySelector('#inputPauseTime').value
+            ? defaultTimePause : document.querySelector('#inputPauseTime').value;
 }
 
 function setFlower(newFlower) {
