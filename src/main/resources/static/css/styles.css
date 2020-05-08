@@ -86,7 +86,7 @@ img {
     background-color: lightgreen;
 }
 
-#achievementImg, #shopFlowerImg{
+#achievementImg {
     max-height: 60px;
 }
 
@@ -95,5 +95,38 @@ img {
     border: 10px solid transparent;
     background-clip: padding-box;
     padding: 20px;
+}
+
+.shopFlowerDiv {
+    margin: 5px;
+    max-width: 70px;
+}
+
+.flowerBtn {
+    padding: 2px;
+}
+
+.shopFlowerRadio {
+    position: absolute;
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.shopFlowerRadio + .shopFlowerImg {
+    cursor: pointer;
+}
+
+.shopFlowerRadio:checked + .shopFlowerImg{
+    outline: 4px solid darkgreen;
+}
+
+.shopFlowerImg {
+    max-height: 60px;
+}
+
+.shopFlowerText {
+    font-size: 10px;
+
 }
 

@@ -6,6 +6,7 @@
     <link href = "css/styles.css" rel = "stylesheet"/>
     <script src="/webjars/jquery/3.5.0/jquery.min.js"></script>
 
+    <link rel="icon" href="images/sunflower.jpg">
     <title>Focus Meadow</title>
 </head>
 <body>
@@ -19,8 +20,7 @@
                 </div>
                 <div class="col-md-3">
                     <img id="coinImg" src="images/sunflower.jpg">
-                    <label id="coinsText" for="coinImg">hej</label>
-
+                    <label id="coinsText" for="coinImg">coins</label>
                 </div>
 
                 <div class="offset-2 col-md-2">
@@ -37,7 +37,7 @@
                         <div class="row  timerRow">
                             <div class="offset-2 col-md-3 form-check">
                                 <div class="custom-control custom-radio">
-                                    <input id="timerTypeWork" type="radio" class="custom-control-input" name="timerType" checked>
+                                    <input id="timerTypeWork" type="radio" class="custom-control-input" name="timerType" onclick="setTimerTextWork()" checked>
                                     <label class="custom-control-label" for="timerTypeWork">work</label>
                                 </div>
                             </div>
@@ -50,7 +50,7 @@
                         <div class="row timerRow">
                             <div class="offset-2 col-md-3 form-check">
                                 <div class="custom-control custom-radio">
-                                    <input id="pauseTypeWork" type="radio" class="custom-control-input" name="timerType">
+                                    <input id="pauseTypeWork" type="radio" class="custom-control-input" name="timerType" onclick="setTimerTextPause()">
                                     <label class="custom-control-label" for="pauseTypeWork">pause</label>
                                 </div>
                             </div>
@@ -76,11 +76,25 @@
                 </div>
                 <div class="row">
                     <div id="shopDiv" class="col-md-12">
-                        shop
-                        <div id="shopFlowerDiv">
-                                <img id="shopFlowerImg" class="img-rounded" src="images/sunflower.jpg"></br>
+                        <div>
+                            <div class="row">
+                                <div th:each="flower : ${shopFlowers}">
+                                    <div class="shopFlowerDiv">
+                                       <label>
+                                           <input class="shopFlowerRadio" type="radio" name="shopFlowers"
+                                                  th:data-flower="${flower.flowerType}"
+                                                  onclick="setFlower(this.getAttribute('data-flower'));" th:checked="${flower.flowerType == shopFlowers[0].flowerType}">
+                                           <img class="shopFlowerImg" th:src="${flower.image}">
+                                       </label>
 
-                            Solros
+                                        <!-- <button class="btn flowerBtn" th:data-flower="${flower.flowerType}" onclick="setFlower(this.getAttribute('data-flower'));" >
+                                            <img class="shopFlowerImg" th:src="${flower.image}"></br>
+                                            <text class="shopFlowerText" th:text="${flower.name}"></text>
+                                        </button>-->
+
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -106,10 +120,10 @@
     </div>
 
 
-
     <script>
         const defaultTimeWork = "[[${workTimer.time}]]";
         const defaultTimePause = "[[${pauseTimer.time}]]";
+        let flower = "[[${shopFlowers[0].flowerType}]]";
     </script>
     <script src="javascript/timerScript.js"></script>
     <script src="webjars/bootstrap/4.4.1-1/js/bootstrap.min.js"></script>

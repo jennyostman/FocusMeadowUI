@@ -4,15 +4,15 @@ let timerIntervals;
 let workType;
 
 function setTimer() {
-    inputTime = document.querySelector('#inputWorkTime').value;
-
     if (document.querySelector('#timerTypeWork').checked) {
+        inputTime = document.querySelector('#inputWorkTime').value;
         workType = true;
         if (inputTime === "") {
             inputTime  = defaultTimeWork;
         }
         startTimer()
     } else if (document.querySelector('#timerTypePause').checked) {
+        inputTime = document.querySelector('#inputPauseTime').value;
         workType = false;
         if (inputTime === "") {
             inputTime  = defaultTimePause;
@@ -58,6 +58,7 @@ function saveSession() {
         userId : "hej",
         time : inputTime,
         workType :  workType,
+        flower : flower,
         interrupted : interrupted
     };
 
@@ -78,4 +79,9 @@ function setTimerTextWork()
 function setTimerTextPause()
 {
     document.querySelector('#timerText').textContent = defaultTimePause;
+}
+
+function setFlower(newFlower) {
+    document.querySelector('#timerText').textContent = newFlower;
+    flower = newFlower;
 }

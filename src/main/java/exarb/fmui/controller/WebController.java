@@ -3,10 +3,8 @@ package exarb.fmui.controller;
 import exarb.fmui.client.LogInUserClient;
 import exarb.fmui.client.RegisteredUserClient;
 import exarb.fmui.exception.RegistrationException;
-import exarb.fmui.model.FlowerWeb;
-import exarb.fmui.model.LoginWeb;
-import exarb.fmui.model.Timer;
-import exarb.fmui.model.UserWeb;
+import exarb.fmui.model.*;
+import exarb.fmui.service.FlowerService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -22,48 +20,62 @@ public class WebController {
 
     private final LogInUserClient logInUserClient;
     private final RegisteredUserClient RegisterUserClient;
+    private final FlowerService flowerService;
 
-    public WebController(LogInUserClient logInUserClient, RegisteredUserClient registerUserClient) {
+    public WebController(LogInUserClient logInUserClient, RegisteredUserClient registerUserClient, FlowerService flowerService) {
         this.logInUserClient = logInUserClient;
-        RegisterUserClient = registerUserClient;
+        this.RegisterUserClient = registerUserClient;
+        this.flowerService = flowerService;
     }
-
 
     @GetMapping("/focusMeadow")
     public String focusMeadow(Model model) {
-        Timer workTimer = new Timer(25, true, false);
-        Timer pauseTimer = new Timer(5, false, false);
+
+        //TODO get all below from gamelogic
+        FlowerWeb sunflower = new FlowerWeb("images/sunflower.jpg", "Sunflower", FlowerType.SUNFLOWER);
+        FlowerWeb pansy = new FlowerWeb("images/pansy.jpg", "Pansy", FlowerType.PANSY);
+        FlowerWeb grass = new FlowerWeb("images/grass.jpg", "Grass", FlowerType.GRASS);
+
+        model.addAttribute("meadowFlowersList", flowerService.getMeadowFlowers());
+
+        TimerWeb workTimer = new TimerWeb("userid", 25, true, null, false);
+        TimerWeb pauseTimer = new TimerWeb("userid", 5, false, null, false);
         model.addAttribute("workTimer", workTimer);
         model.addAttribute("pauseTimer", pauseTimer);
 
-        FlowerWeb sunflower = new FlowerWeb("images/sunflower.jpg", "Sunflower");
-        FlowerWeb pansy = new FlowerWeb("images/pansy.jpg", "Pansy");
-        FlowerWeb grass = new FlowerWeb("images/grass.jpg", "Grass");
-
-        Random random = new Random();
-        List<FlowerWeb> flowerList = new ArrayList<>();
-        for (int i = 0; i < 64; i++) {
-            int ran = random.nextInt(4);
-            if ( ran == 0){
-                flowerList.add(sunflower);
-            } else if (ran == 1){
-                flowerList.add(pansy);
-            } else {
-                flowerList.add(grass);
-            }
-
-        }
-
-        model.addAttribute("meadowFlowersList", flowerList);
+        //TODO get from gamification
+        List<FlowerWeb> shopFlowers = new ArrayList<>();
+        shopFlowers.add(sunflower);
+        shopFlowers.add(pansy);
+        shopFlowers.add(sunflower);
+        shopFlowers.add(pansy);
+        shopFlowers.add(sunflower);
+        shopFlowers.add(pansy);
+        shopFlowers.add(sunflower);
+        shopFlowers.add(pansy);
+        shopFlowers.add(sunflower);
+        shopFlowers.add(pansy);
+        shopFlowers.add(sunflower);
+        shopFlowers.add(pansy);
+        shopFlowers.add(sunflower);
+        shopFlowers.add(pansy);
+        shopFlowers.add(sunflower);
+        shopFlowers.add(pansy);
+        shopFlowers.add(sunflower);
+        shopFlowers.add(pansy);
+        model.addAttribute("shopFlowers", shopFlowers);
 
         return "focusMeadow";
     }
 
     @PostMapping("/saveSession")
-    public String saveSession(@RequestBody Timer result) {
+    public String saveSession(@RequestBody TimerWeb result) {
+        System.out.println("save");
         System.out.println("saveSession" + result.toString());
+        System.out.println("user: " +result.getUserId());
         System.out.println("time: " + result.getTime());
         System.out.println("isWorkType: " + result.isWorkType());
+        System.out.println("flower: " + result.getFlower().toString());
         System.out.println("interrupted: " + result.isInterrupted());
         return "saveSession";
     }
