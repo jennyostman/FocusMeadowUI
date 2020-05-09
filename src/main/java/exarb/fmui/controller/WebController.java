@@ -1,43 +1,87 @@
 package exarb.fmui.controller;
 
-import exarb.fmui.client.LogInUserClient;
+import exarb.fmui.client.UserClient;
 import exarb.fmui.client.RegisteredUserClient;
+import exarb.fmui.client.dto.UserGameData;
 import exarb.fmui.exception.RegistrationException;
-import exarb.fmui.model.LoginWeb;
-import exarb.fmui.model.Timer;
-import exarb.fmui.model.UserWeb;
+import exarb.fmui.model.*;
+import exarb.fmui.service.FlowerService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.util.ArrayList;
+import java.util.List;
+
 
 @Controller
 public class WebController {
 
-    private final LogInUserClient logInUserClient;
+    private final UserClient userClient;
     private final RegisteredUserClient RegisterUserClient;
+    private final FlowerService flowerService;
+    private UserGameData userGameData;
 
-    public WebController(LogInUserClient logInUserClient, RegisteredUserClient registerUserClient) {
-        this.logInUserClient = logInUserClient;
-        RegisterUserClient = registerUserClient;
+    public WebController(UserClient userClient, RegisteredUserClient registerUserClient, FlowerService flowerService) {
+        this.userClient = userClient;
+        this.RegisterUserClient = registerUserClient;
+        this.flowerService = flowerService;
     }
 
+    @GetMapping("/focusMeadow")
+    public String focusMeadow(Model model) {
+        model.addAttribute("userName", userGameData.getUserName());
+        model.addAttribute("totalTime", userGameData.getEarnedHours() + "h " + userGameData.getEarnedMinutes() + "min");
+        model.addAttribute("coins", userGameData.getCoins());
+        model.addAttribute("meadow", flowerService.getMeadowFlowers(userGameData.getMeadow()));
+        model.addAttribute("choosableFlowers", flowerService.getMeadowFlowers(userGameData.getChoosableFlowers()));
 
-    @GetMapping("/timer")
-    public String timer(Model model) {
-        Timer workTimer = new Timer(2, true, false);
-        Timer pauseTimer = new Timer(1, false, false);
+        //TODO get all below from gamelogic
+        FlowerWeb sunflower = new FlowerWeb("images/sunflower.jpg", "Sunflower", FlowerType.SUNFLOWER);
+        FlowerWeb pansy = new FlowerWeb("images/pansy.jpg", "Pansy", FlowerType.PANSY);
+        FlowerWeb grass = new FlowerWeb("images/grass.jpg", "Grass", FlowerType.GRASS);
+
+
+
+        TimerWeb workTimer = new TimerWeb("userid", 25, true, null, false);
+        TimerWeb pauseTimer = new TimerWeb("userid", 5, false, null, false);
         model.addAttribute("workTimer", workTimer);
         model.addAttribute("pauseTimer", pauseTimer);
-        return "timer";
+
+        //TODO get from gamification
+        List<FlowerWeb> shopFlowers = new ArrayList<>();
+        shopFlowers.add(sunflower);
+        shopFlowers.add(pansy);
+        shopFlowers.add(sunflower);
+        shopFlowers.add(pansy);
+        shopFlowers.add(sunflower);
+        shopFlowers.add(pansy);
+        shopFlowers.add(sunflower);
+        shopFlowers.add(pansy);
+        shopFlowers.add(sunflower);
+        shopFlowers.add(pansy);
+        shopFlowers.add(sunflower);
+        shopFlowers.add(pansy);
+        shopFlowers.add(sunflower);
+        shopFlowers.add(pansy);
+        shopFlowers.add(sunflower);
+        shopFlowers.add(pansy);
+        shopFlowers.add(sunflower);
+        shopFlowers.add(pansy);
+        model.addAttribute("shopFlowers", shopFlowers);
+
+        return "focusMeadow";
     }
 
     @PostMapping("/saveSession")
-    public String saveSession(@RequestBody Timer result) {
+    public String saveSession(@RequestBody TimerWeb result) {
+        System.out.println("save");
         System.out.println("saveSession" + result.toString());
+        System.out.println("user: " +result.getUserId());
         System.out.println("time: " + result.getTime());
         System.out.println("isWorkType: " + result.isWorkType());
+        System.out.println("flower: " + result.getFlower().toString());
         System.out.println("interrupted: " + result.isInterrupted());
         return "saveSession";
     }
@@ -50,10 +94,10 @@ public class WebController {
     }
 
     @PostMapping("/login")
-    // Vad ska ligga i ModelAttribute?!
-    public String submitLoginForm(@ModelAttribute("user") LoginWeb loginWeb) {
-        if (logInUserClient.logInByUsernameAndPassword(loginWeb) != null){
-            return "focusMeadow";
+    public String submitLoginForm(@ModelAttribute("user") LoginWeb loginWeb, Model model) {
+        userGameData = userClient.logInByUsernameAndPassword(loginWeb);
+        if (userGameData != null){
+            return focusMeadow(model);
         }
         else {
             return "fel";

@@ -28,6 +28,6 @@ public class LogInUserDeserializer extends JsonDeserializer<LoggedInUser> {
         ObjectCodec oc = jsonParser.getCodec();
         JsonNode node = oc.readTree(jsonParser);
 
-        return new LoggedInUser(node.get("userName").asText());
+        return new LoggedInUser(node.get("id").asText(), node.get("userName").asText());
     }
 }

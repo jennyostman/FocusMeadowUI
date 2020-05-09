@@ -1,17 +1,21 @@
 package exarb.fmui.model;
 
-public class Timer {
+public class TimerWeb {
 
+    private String userId;
     private int time;
     private boolean workType;
+    private FlowerType flower;
     private boolean interrupted;
 
-    public Timer() {
+    public TimerWeb() {
     }
 
-    public Timer(int time, boolean workType, boolean interrupted) {
+    public TimerWeb(String userId, int time, boolean workType, FlowerType flower, boolean interrupted) {
+        this.userId = userId;
         this.time = time;
         this.workType = workType;
+        this.flower = flower;
         this.interrupted = interrupted;
     }
 
@@ -37,6 +41,14 @@ public class Timer {
 
     public void setInterrupted(boolean interrupted) {
         this.interrupted = interrupted;
+    }
+
+    public String getUserId() {
+        return userId;
+    }
+
+    public FlowerType getFlower() {
+        return flower;
     }
 
     @Override
