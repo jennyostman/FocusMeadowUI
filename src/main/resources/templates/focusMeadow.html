@@ -81,12 +81,20 @@
                                 <div th:each="flower : ${choosableFlowers}">
                                     <div class="choosableFlowerDiv">
                                        <label>
-                                           <input class="choosableFlowerRadio" type="radio" name="shopFlowers"
+                                           <input class="choosableFlowerRadio" type="radio" name="choosableFlowers"
                                                   th:data-flower="${flower.flowerType}"
                                                   onclick="setFlower(this.getAttribute('data-flower'));" th:checked="${flower.flowerType == choosableFlowers[0].flowerType}">
-                                           <img class="shopFlowerImg" th:src="${flower.image}">
+                                           <img class="choosableFlowerImg" th:src="${flower.image}">
                                        </label>
+                                    </div>
+                                </div>
 
+                                <div th:each="flower : ${shopFlowers}">
+                                    <div class="shopFlowerDiv">
+                                        <label>
+                                            <input class="shopFlowerRadio" type="radio" name="shopFlowers" disabled>
+                                            <img class="shopFlowerImg" th:src="${flower.image}">
+                                        </label>
                                     </div>
                                 </div>
                             </div>

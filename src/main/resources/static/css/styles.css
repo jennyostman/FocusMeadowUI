@@ -2,11 +2,6 @@ body {
     background-color: lightgreen;
 }
 
-/*div[class*='col'] {
-    border: 1px solid red;
-    padding: 5px;
-}*/
-
 .row {
     margin-top: 5px;
 }
@@ -97,7 +92,7 @@ img {
     padding: 20px;
 }
 
-.choosableFlowerDiv {
+.choosableFlowerDiv, .shopFlowerDiv {
     margin: 5px;
     max-width: 70px;
 }
@@ -106,23 +101,27 @@ img {
     padding: 2px;
 }
 
-.choosableFlowerRadio {
+.choosableFlowerRadio, .shopFlowerRadio {
     position: absolute;
     opacity: 0;
     width: 0;
     height: 0;
 }
 
-.choosableFlowerRadio + .shopFlowerImg {
+.choosableFlowerRadio + .choosableFlowerImg, .shopFlowerRadio + .shopFlowerImg {
     cursor: pointer;
 }
 
-.choosableFlowerRadio:checked + .shopFlowerImg{
+.choosableFlowerRadio:checked + .choosableFlowerImg, .shopFlowerRadio:checked + .shopFlowerImg{
     outline: 4px solid darkgreen;
 }
 
-.shopFlowerImg {
+.choosableFlowerImg, .shopFlowerImg {
     max-height: 60px;
+}
+
+.shopFlowerImg {
+    opacity: 70%;
 }
 
 .shopFlowerText {
