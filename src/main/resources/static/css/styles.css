@@ -97,7 +97,7 @@ img {
     padding: 20px;
 }
 
-.shopFlowerDiv {
+.choosableFlowerDiv {
     margin: 5px;
     max-width: 70px;
 }
@@ -106,18 +106,18 @@ img {
     padding: 2px;
 }
 
-.shopFlowerRadio {
+.choosableFlowerRadio {
     position: absolute;
     opacity: 0;
     width: 0;
     height: 0;
 }
 
-.shopFlowerRadio + .shopFlowerImg {
+.choosableFlowerRadio + .shopFlowerImg {
     cursor: pointer;
 }
 
-.shopFlowerRadio:checked + .shopFlowerImg{
+.choosableFlowerRadio:checked + .shopFlowerImg{
     outline: 4px solid darkgreen;
 }
 

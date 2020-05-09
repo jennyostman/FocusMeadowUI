@@ -2,10 +2,14 @@ package exarb.fmui.client.dto;
 
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import exarb.fmui.client.LogInUserDeserializer;
+import exarb.fmui.model.FlowerType;
+
+import java.util.List;
 
 @JsonDeserialize(using = LogInUserDeserializer.class)
 public class LoggedInUser {
 
+    private String userId;
     private String userName;
 
     public LoggedInUser(String userName) {
@@ -14,6 +18,19 @@ public class LoggedInUser {
 
     public LoggedInUser() {
         this.userName = null;
+    }
+
+    public LoggedInUser(String userId, String userName) {
+        this.userId = userId;
+        this.userName = userName;
+    }
+
+    public String getUserId() {
+        return userId;
+    }
+
+    public void setUserId(String userId) {
+        this.userId = userId;
     }
 
     public String getUserName() {
@@ -27,7 +44,8 @@ public class LoggedInUser {
     @Override
     public String toString() {
         return "LoggedInUser{" +
-                "userName='" + userName + '\'' +
+                "userId='" + userId + '\'' +
+                ", userName='" + userName + '\'' +
                 '}';
     }
 }

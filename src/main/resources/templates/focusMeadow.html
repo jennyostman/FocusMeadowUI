@@ -13,14 +13,14 @@
     <div class="container">
         <div id="headerDiv" class="row">
                 <div class="col-md-3">
-                    <h4 id="userText" th:text="${user.getUserName()}"></h4>
+                    <h4 id="userText" th:text="${userName}"></h4>
                 </div>
                 <div class="col-md-2">
-                    <h4 id="totalTimeText">4h 20min</h4>
+                    <h4 id="totalTimeText" th:text="${totalTime}"></h4>
                 </div>
                 <div class="col-md-3">
                     <img id="coinImg" src="images/sunflower.jpg">
-                    <label id="coinsText" for="coinImg">coins</label>
+                    <label id="coinsText" for="coinImg" th:text="${coins}"></label>
                 </div>
 
                 <div class="offset-2 col-md-2">
@@ -69,7 +69,7 @@
                     </div>
 
                     <div id="meadowDiv" class="col-md-6 text-center">
-                            <tr th:each="flower : ${meadowFlowersList}">
+                            <tr th:each="flower : ${meadow}">
                                 <img class="meadowFlowerImg" th:src="${flower.image}">
                             </tr>
                     </div>
@@ -78,19 +78,14 @@
                     <div id="shopDiv" class="col-md-12">
                         <div>
                             <div class="row">
-                                <div th:each="flower : ${shopFlowers}">
-                                    <div class="shopFlowerDiv">
+                                <div th:each="flower : ${choosableFlowers}">
+                                    <div class="choosableFlowerDiv">
                                        <label>
-                                           <input class="shopFlowerRadio" type="radio" name="shopFlowers"
+                                           <input class="choosableFlowerRadio" type="radio" name="shopFlowers"
                                                   th:data-flower="${flower.flowerType}"
-                                                  onclick="setFlower(this.getAttribute('data-flower'));" th:checked="${flower.flowerType == shopFlowers[0].flowerType}">
+                                                  onclick="setFlower(this.getAttribute('data-flower'));" th:checked="${flower.flowerType == choosableFlowers[0].flowerType}">
                                            <img class="shopFlowerImg" th:src="${flower.image}">
                                        </label>
-
-                                        <!-- <button class="btn flowerBtn" th:data-flower="${flower.flowerType}" onclick="setFlower(this.getAttribute('data-flower'));" >
-                                            <img class="shopFlowerImg" th:src="${flower.image}"></br>
-                                            <text class="shopFlowerText" th:text="${flower.name}"></text>
-                                        </button>-->
 
                                     </div>
                                 </div>
@@ -123,7 +118,7 @@
     <script>
         const defaultTimeWork = "[[${workTimer.time}]]";
         const defaultTimePause = "[[${pauseTimer.time}]]";
-        let flower = "[[${shopFlowers[0].flowerType}]]";
+        let flower = "[[${choosableFlowers[0].flowerType}]]";
     </script>
     <script src="javascript/timerScript.js"></script>
     <script src="webjars/bootstrap/4.4.1-1/js/bootstrap.min.js"></script>

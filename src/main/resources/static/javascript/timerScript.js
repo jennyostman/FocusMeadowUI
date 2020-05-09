@@ -86,6 +86,5 @@ function setTimerTextPause()
 }
 
 function setFlower(newFlower) {
-    document.querySelector('#timerText').textContent = newFlower;
     flower = newFlower;
 }
