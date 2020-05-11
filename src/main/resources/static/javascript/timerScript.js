@@ -6,14 +6,14 @@ let workType;
 function setTimer() {
     if (document.querySelector('#timerTypeWork').checked) {
         inputTime = document.querySelector('#inputWorkTime').value;
-        workType = true;
+        workType = "WORK";
         if (inputTime === "") {
             inputTime  = defaultTimeWork;
         }
         startTimer()
     } else if (document.querySelector('#timerTypePause').checked) {
         inputTime = document.querySelector('#inputPauseTime').value;
-        workType = false;
+        workType = "PAUSE";
         if (inputTime === "") {
             inputTime  = defaultTimePause;
         }
@@ -48,6 +48,7 @@ function startTimer() {
 function stopTimer() {
     document.querySelector('#startButton').disabled = false;
     document.querySelector('#stopButton').disabled = true;
+    setTimerTextWork();
     interrupted = true;
     clearInterval(timerIntervals);
     saveSession();
@@ -55,10 +56,9 @@ function stopTimer() {
 
 function saveSession() {
     const result  = {
-        userId : "hej",
         time : inputTime,
-        workType :  workType,
-        flower : flower,
+        sessionType :  workType,
+        flowerToPlant : flower,
         interrupted : interrupted
     };
 
@@ -67,7 +67,21 @@ function saveSession() {
         contentType : "application/json",
         url : "/saveSession",
         data : JSON.stringify(result),
-        dataType : 'json'
+        dataType : 'text',
+        success : function(response) {
+            if ($(response).find('.has-error').length) {
+                location.reload();
+/*
+                $form.replaceWith(response);
+*/
+            }
+            else{
+                location.reload();
+/*
+                $("#ajaxLoadedContent").replaceWith(response);
+*/
+            }
+        }
     });
 }
 

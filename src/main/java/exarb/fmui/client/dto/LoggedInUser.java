@@ -2,9 +2,6 @@ package exarb.fmui.client.dto;
 
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import exarb.fmui.client.LogInUserDeserializer;
-import exarb.fmui.model.FlowerType;
-
-import java.util.List;
 
 @JsonDeserialize(using = LogInUserDeserializer.class)
 public class LoggedInUser {

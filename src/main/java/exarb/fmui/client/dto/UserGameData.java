@@ -2,13 +2,14 @@ package exarb.fmui.client.dto;
 
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import exarb.fmui.client.UserGameDataDeserializer;
-import exarb.fmui.model.FlowerType;
+import exarb.fmui.enums.FlowerType;
 
 import java.util.List;
 
 @JsonDeserialize(using = UserGameDataDeserializer.class)
 public class UserGameData {
 
+    private String userId;
     private String userName;
     private List<FlowerType> meadow;
     private int coins;
@@ -16,7 +17,8 @@ public class UserGameData {
     private int earnedHours;
     private int earnedMinutes;
 
-    public UserGameData(String userName, List<FlowerType> meadow, int coins, List<FlowerType> choosableFlowers, int earnedHours, int earnedMinutes) {
+    public UserGameData(String userId, String userName, List<FlowerType> meadow, int coins, List<FlowerType> choosableFlowers, int earnedHours, int earnedMinutes) {
+        this.userId = userId;
         this.userName = userName;
         this.meadow = meadow;
         this.coins = coins;
@@ -26,6 +28,10 @@ public class UserGameData {
     }
 
     public UserGameData() { }
+
+    public String getUserId() {
+        return userId;
+    }
 
     public String getUserName() {
         return userName;
