@@ -3,6 +3,7 @@ package exarb.fmui.client;
 import exarb.fmui.client.dto.LoggedInUser;
 import exarb.fmui.client.dto.UserGameData;
 import exarb.fmui.model.LoginWeb;
+import exarb.fmui.model.TimerWeb;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
@@ -30,9 +31,23 @@ public class UserClient {
         LoggedInUser loggedInUser = null;
         UserGameData userGameData = null;
         try {
+            System.out.println("login");
             loggedInUser = restTemplate.postForEntity(userHost + "/users/login/", loginWeb, LoggedInUser.class).getBody();
             if (loggedInUser != null)
                 userGameData = restTemplate.getForEntity(userHost + "/timers/game/" + loggedInUser.getUserId(), UserGameData.class).getBody();
+        }
+        catch (Exception e){
+            System.out.println("exception: " + e);
+        }
+
+        return userGameData;
+    }
+
+    public UserGameData saveTimerSession(TimerWeb timerWeb) {
+        UserGameData userGameData = null;
+        try {
+            System.out.println("save");
+            userGameData = restTemplate.postForEntity(userHost + "/timers/timer/save", timerWeb, UserGameData.class, timerWeb.getUserId()).getBody();
         }
         catch (Exception e){
             System.out.println("exception: " + e);

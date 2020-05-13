@@ -3,6 +3,8 @@ package exarb.fmui.controller;
 import exarb.fmui.client.UserClient;
 import exarb.fmui.client.RegisteredUserClient;
 import exarb.fmui.client.dto.UserGameData;
+import exarb.fmui.enums.FlowerType;
+import exarb.fmui.enums.SessionType;
 import exarb.fmui.exception.RegistrationException;
 import exarb.fmui.model.*;
 import exarb.fmui.service.FlowerService;
@@ -44,8 +46,8 @@ public class WebController {
 
 
 
-        TimerWeb workTimer = new TimerWeb("userid", 25, true, null, false);
-        TimerWeb pauseTimer = new TimerWeb("userid", 5, false, null, false);
+        TimerWeb workTimer = new TimerWeb("userid", 25, SessionType.WORK, null, false);
+        TimerWeb pauseTimer = new TimerWeb("userid", 5, SessionType.PAUSE, null, false);
         model.addAttribute("workTimer", workTimer);
         model.addAttribute("pauseTimer", pauseTimer);
 
@@ -75,15 +77,27 @@ public class WebController {
     }
 
     @PostMapping("/saveSession")
-    public String saveSession(@RequestBody TimerWeb result) {
+    public String saveSession(@RequestBody TimerWeb result, Model model) {
         System.out.println("save");
         System.out.println("saveSession" + result.toString());
-        System.out.println("user: " +result.getUserId());
+        System.out.println("user: " + userGameData);
+        result.setUserId(userGameData.getUserId());
+        System.out.println("user: " + result.getUserId());
         System.out.println("time: " + result.getTime());
-        System.out.println("isWorkType: " + result.isWorkType());
-        System.out.println("flower: " + result.getFlower().toString());
+        System.out.println("isWorkType: " + result.getSessionType());
+        System.out.println("flower: " + result.getFlowerToPlant());
         System.out.println("interrupted: " + result.isInterrupted());
-        return "saveSession";
+
+        userGameData = userClient.saveTimerSession(result);
+
+        System.out.println("user: " + userGameData);
+
+        if (userGameData != null){
+            return focusMeadow(model);
+        }
+        else {
+            return "fel";
+        }
     }
 
     @GetMapping(value = "/login")

@@ -7,7 +7,7 @@ import com.fasterxml.jackson.databind.DeserializationContext;
 import com.fasterxml.jackson.databind.JsonDeserializer;
 import com.fasterxml.jackson.databind.JsonNode;
 import exarb.fmui.client.dto.UserGameData;
-import exarb.fmui.model.FlowerType;
+import exarb.fmui.enums.FlowerType;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -46,7 +46,7 @@ public class UserGameDataDeserializer extends JsonDeserializer<UserGameData> {
             counter++;
         }
 
-        return new UserGameData(node.get("userName").asText(), meadow , node.get("coins").asInt(),
+        return new UserGameData(node.get("userId").asText(), node.get("userName").asText(), meadow , node.get("coins").asInt(),
                 choosableFlowers, node.get("earnedHours").asInt(), node.get("earnedMinutes").asInt());
     }
 }

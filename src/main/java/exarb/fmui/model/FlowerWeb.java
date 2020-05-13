@@ -1,5 +1,7 @@
 package exarb.fmui.model;
 
+import exarb.fmui.enums.FlowerType;
+
 public class FlowerWeb {
     private String image;
     private String name;
