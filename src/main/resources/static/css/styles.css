@@ -128,4 +128,13 @@ img {
     font-size: 10px;
 
 }
+.flowerShopCoin {
+    max-height: 20px;
+}
 
+.flowerShopButton {
+    margin-top: 3px;
+    max-height: 30px;
+    width: 60px;
+    padding: 0;
+}

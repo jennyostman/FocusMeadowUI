@@ -70,7 +70,7 @@
 
                     <div id="meadowDiv" class="col-md-6 text-center">
                             <tr th:each="flower : ${meadow}">
-                                <img class="meadowFlowerImg" th:src="${flower.image}">
+                                <img class="meadowFlowerImg" th:src="'images/' + ${flower.image}">
                             </tr>
                     </div>
                 </div>
@@ -84,7 +84,7 @@
                                            <input class="choosableFlowerRadio" type="radio" name="choosableFlowers"
                                                   th:data-flower="${flower.flowerType}"
                                                   onclick="setFlower(this.getAttribute('data-flower'));" th:checked="${flower.flowerType == choosableFlowers[0].flowerType}">
-                                           <img class="choosableFlowerImg" th:src="${flower.image}">
+                                           <img class="choosableFlowerImg" th:src="'images/' + ${flower.image}">
                                        </label>
                                     </div>
                                 </div>
@@ -93,7 +93,17 @@
                                     <div class="shopFlowerDiv">
                                         <label>
                                             <input class="shopFlowerRadio" type="radio" name="shopFlowers" disabled>
-                                            <img class="shopFlowerImg" th:src="${flower.image}">
+                                            <img class="shopFlowerImg" th:src="'images/' + ${flower.image}">
+                                            <button class="flowerShopButton btn btn-light"
+                                                    th:data-flower="${flower.flowerType}"
+                                                    th:data-coins="${coins}"
+                                                    th:data-cost="${flower.getPrice()}"
+                                                    onclick="buyFlower(this.getAttribute('data-flower'),
+                                                    this.getAttribute('data-coins'),
+                                                    this.getAttribute('data-cost'));">
+                                                <text th:text="${flower.getPrice()}"></text>
+                                                <img class="flowerShopCoin" src="images/coinButton.jpg">
+                                            </button>
                                         </label>
                                     </div>
                                 </div>
