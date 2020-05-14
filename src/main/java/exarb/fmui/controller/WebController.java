@@ -7,11 +7,15 @@ import exarb.fmui.enums.FlowerType;
 import exarb.fmui.enums.SessionType;
 import exarb.fmui.exception.RegistrationException;
 import exarb.fmui.model.*;
+import exarb.fmui.service.AchievementService;
 import exarb.fmui.service.FlowerService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Controller
 public class WebController {
@@ -19,12 +23,14 @@ public class WebController {
     private final UserClient userClient;
     private final RegisteredUserClient RegisterUserClient;
     private final FlowerService flowerService;
+    private final AchievementService achievementService;
     private UserGameData userGameData;
 
-    public WebController(UserClient userClient, RegisteredUserClient registerUserClient, FlowerService flowerService) {
+    public WebController(UserClient userClient, RegisteredUserClient registerUserClient, FlowerService flowerService, AchievementService achievementService) {
         this.userClient = userClient;
         this.RegisterUserClient = registerUserClient;
         this.flowerService = flowerService;
+        this.achievementService = achievementService;
     }
 
     @GetMapping("/focusMeadow")
@@ -35,6 +41,11 @@ public class WebController {
         model.addAttribute("meadow", flowerService.getMeadowFlowers(userGameData.getMeadow()));
         model.addAttribute("choosableFlowers", flowerService.getMeadowFlowers(userGameData.getChoosableFlowers()));
         model.addAttribute("shopFlowers", flowerService.getShopFlowers(userGameData.getChoosableFlowers()));
+
+        //TODO get from gamification
+        List<String> achivementList = new ArrayList<>();
+        achivementList.add("hej");
+        model.addAttribute("unearnedAchievements", achievementService.getUnearnedAchievements(achivementList));
 
         //TODO get all below from gamelogic
         TimerWeb workTimer = new TimerWeb("userid", 25, SessionType.WORK, null, false);
