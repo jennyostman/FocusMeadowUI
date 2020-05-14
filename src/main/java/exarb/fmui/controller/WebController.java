@@ -13,10 +13,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
-import java.util.ArrayList;
-import java.util.List;
-
-
 @Controller
 public class WebController {
 
@@ -38,40 +34,13 @@ public class WebController {
         model.addAttribute("coins", userGameData.getCoins());
         model.addAttribute("meadow", flowerService.getMeadowFlowers(userGameData.getMeadow()));
         model.addAttribute("choosableFlowers", flowerService.getMeadowFlowers(userGameData.getChoosableFlowers()));
+        model.addAttribute("shopFlowers", flowerService.getShopFlowers(userGameData.getChoosableFlowers()));
 
         //TODO get all below from gamelogic
-        FlowerWeb sunflower = new FlowerWeb("images/sunflower.jpg", "Sunflower", FlowerType.SUNFLOWER);
-        FlowerWeb pansy = new FlowerWeb("images/pansy.jpg", "Pansy", FlowerType.PANSY);
-        FlowerWeb grass = new FlowerWeb("images/grass.jpg", "Grass", FlowerType.GRASS);
-
-
-
         TimerWeb workTimer = new TimerWeb("userid", 25, SessionType.WORK, null, false);
         TimerWeb pauseTimer = new TimerWeb("userid", 5, SessionType.PAUSE, null, false);
         model.addAttribute("workTimer", workTimer);
         model.addAttribute("pauseTimer", pauseTimer);
-
-        //TODO get from gamification
-        List<FlowerWeb> shopFlowers = new ArrayList<>();
-        shopFlowers.add(sunflower);
-        shopFlowers.add(pansy);
-        shopFlowers.add(sunflower);
-        shopFlowers.add(pansy);
-        shopFlowers.add(sunflower);
-        shopFlowers.add(pansy);
-        shopFlowers.add(sunflower);
-        shopFlowers.add(pansy);
-        shopFlowers.add(sunflower);
-        shopFlowers.add(pansy);
-        shopFlowers.add(sunflower);
-        shopFlowers.add(pansy);
-        shopFlowers.add(sunflower);
-        shopFlowers.add(pansy);
-        shopFlowers.add(sunflower);
-        shopFlowers.add(pansy);
-        shopFlowers.add(sunflower);
-        shopFlowers.add(pansy);
-        model.addAttribute("shopFlowers", shopFlowers);
 
         return "focusMeadow";
     }
@@ -91,6 +60,18 @@ public class WebController {
         userGameData = userClient.saveTimerSession(result);
 
         System.out.println("user: " + userGameData);
+
+        if (userGameData != null){
+            return focusMeadow(model);
+        }
+        else {
+            return "fel";
+        }
+    }
+
+    @PostMapping("/buyFlower")
+    public String buyFlower(@RequestBody FlowerType flowerType, Model model) {
+        userGameData = flowerService.buyFlower(flowerType, userGameData.getUserId());
 
         if (userGameData != null){
             return focusMeadow(model);
