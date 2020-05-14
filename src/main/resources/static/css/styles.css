@@ -81,8 +81,12 @@ img {
     background-color: lightgreen;
 }
 
-#achievementImg {
+.achievementImg {
     max-height: 60px;
+}
+
+.achievementTitle {
+    font-weight: bold;
 }
 
 #shopDiv {

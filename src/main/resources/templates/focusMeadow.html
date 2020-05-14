@@ -115,13 +115,15 @@
 
             <div id="achievementsDiv" class="col-md-4">
                 <h4>Achievements</h4>
-                <div id="achievementDiv" class="row">
-                    <div class="col-md-3">
-                        <img id="achievementImg" src="images/achievement.jpg">
-                    </div>
-
-                    <div class="col-md-3">
-                        Achievement
+                <div th:each="achievement : ${unearnedAchievements}">
+                    <div class="achievementDiv row">
+                        <div class="col-md-3">
+                            <img class="achievementImg" src="images/achievement.jpg">
+                        </div>
+                        <div class="col-md-9">
+                            <text class="achievementTitle" th:text="${achievement.getName()}"></text></br>
+                            <text th:text="${achievement.getDescription()}"></text>
+                        </div>
                     </div>
                 </div>
             </div>
