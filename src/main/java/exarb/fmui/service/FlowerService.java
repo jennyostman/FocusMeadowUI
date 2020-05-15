@@ -28,7 +28,6 @@ public class FlowerService {
      * @return List<FlowerWeb> a list containing FlowerWeb objects
      */
     public List<FlowerWeb> getMeadowFlowers(List<FlowerType> flowerTypeList){
-        System.out.println("flowerTypeList: " + flowerTypeList.toString());
         List<FlowerWeb> flowerList = new ArrayList<>();
 
         for (FlowerType flower : flowerTypeList) {

@@ -26,9 +26,9 @@ public class RabbitMQConfiguration implements RabbitListenerConfigurer {
     }
 
     /**
-     * Creates a durable Queue for timerCount events.
+     * Creates a durable Queue for achievement events.
      * @param achievementQueue
-     * @return
+     * @return Queue
      */
     // TODO: We make the Queue durable (the second true argument when creating it).
     //  We introduced this idea before: by doing this we can process pending events
