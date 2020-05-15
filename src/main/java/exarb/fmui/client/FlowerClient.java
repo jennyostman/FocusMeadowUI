@@ -25,7 +25,7 @@ public class FlowerClient {
         this.userHost = userHost;
     }
 
-    /**Gets all the flowers in the database and returns them as a HashMap
+    /** Gets all the flowers in the database and returns them as a HashMap
      *
      * @return Map<FlowerType, FlowerWeb>
      */
