@@ -24,7 +24,9 @@
                 </div>
 
                 <div class="offset-2 col-md-2">
-                    <button id="logOutButton" class="btn btn-light">Log out</button>
+                    <form action="#" th:action="@{/logout}" method="get">
+                        <button id="logOutButton" class="btn btn-light" type="submit">Log out</button><br/>
+                    </form>
                 </div>
         </div>
 
@@ -114,7 +116,6 @@
             </div>
 
             <div id="achievementsDiv" class="col-md-4">
-                <h4>Achievements</h4>
                 <div th:each="achievement : ${unearnedAchievements}">
                     <div class="achievementDiv row">
                         <div class="col-md-3">

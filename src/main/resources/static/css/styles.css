@@ -31,8 +31,9 @@ img {
     margin: 10px;
 }
 
+/**Header**/
 #headerDiv {
-    background-color: yellowgreen;
+    background-color: rgba(34,139,34, 0.5);
     padding: 10px 5px 5px;
 }
 
@@ -45,6 +46,8 @@ img {
     margin-bottom: 5px;
 }
 
+
+/**Meadow**/
 #meadowDiv {
     border: 10px solid transparent;
     background: forestgreen;
@@ -58,8 +61,9 @@ img {
     max-height: 35px;
 }
 
+
+/**Timer**/
 #timerDiv {
-    background-color: yellowgreen;
     padding: 20px;
     border: 10px solid transparent;
     background-clip: padding-box;
@@ -69,8 +73,9 @@ img {
     margin: 30px 30px 40px;
 }
 
+
+/**Achievements**/
 #achievementsDiv {
-    background-color: yellowgreen;
     margin-top: 5px;
     border: 10px solid transparent;
     background-clip: padding-box;
@@ -89,8 +94,9 @@ img {
     font-weight: bold;
 }
 
+
+/**Flowers/Shop**/
 #shopDiv {
-    background-color: yellowgreen;
     border: 10px solid transparent;
     background-clip: padding-box;
     padding: 20px;
@@ -132,6 +138,7 @@ img {
     font-size: 10px;
 
 }
+
 .flowerShopCoin {
     max-height: 20px;
 }
