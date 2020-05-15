@@ -58,19 +58,8 @@ public class WebController {
 
     @PostMapping("/saveSession")
     public String saveSession(@RequestBody TimerWeb result, Model model) {
-        System.out.println("save");
-        System.out.println("saveSession" + result.toString());
-        System.out.println("user: " + userGameData);
         result.setUserId(userGameData.getUserId());
-        System.out.println("user: " + result.getUserId());
-        System.out.println("time: " + result.getTime());
-        System.out.println("isWorkType: " + result.getSessionType());
-        System.out.println("flower: " + result.getFlowerToPlant());
-        System.out.println("interrupted: " + result.isInterrupted());
-
         userGameData = userClient.saveTimerSession(result);
-
-        System.out.println("user: " + userGameData);
 
         if (userGameData != null){
             return focusMeadow(model);
@@ -90,6 +79,14 @@ public class WebController {
         else {
             return "fel";
         }
+    }
+
+    @GetMapping(value = "/logout")
+    public String logout(Model model) {
+        userGameData = null;
+        LoginWeb loginWeb = new LoginWeb();
+        model.addAttribute("loginWeb", loginWeb);
+        return "login";
     }
 
     @GetMapping(value = "/login")
