@@ -110,6 +110,7 @@ public class WebController {
     @GetMapping(value = "/logout")
     public String logout(Model model) {
         userGameData = null;
+        achievedAchievements = null;
         LoginWeb loginWeb = new LoginWeb();
         model.addAttribute("loginWeb", loginWeb);
         return "login";
