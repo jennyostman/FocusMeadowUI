@@ -1,5 +1,8 @@
 package exarb.fmui.model;
 
+/**
+ * Model for the users login information
+ */
 public class LoginWeb {
 
     private String userName;

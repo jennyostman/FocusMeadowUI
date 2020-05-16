@@ -6,6 +6,9 @@ import exarb.fmui.enums.FlowerType;
 
 import java.util.List;
 
+/**
+ * Model containing only the information needed from backend's UserGameData
+ */
 @JsonDeserialize(using = UserGameDataDeserializer.class)
 public class UserGameData {
 

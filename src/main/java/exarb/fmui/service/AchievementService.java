@@ -8,6 +8,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * Service for handling achievements
+ */
 @Service
 public class AchievementService {
 
@@ -19,6 +22,11 @@ public class AchievementService {
         allAchievementsMap = achievementClient.getAllAchievementsMap();
     }
 
+    /**
+     * Picks out the achievements that ar on the given list
+     * @param achievementTypeList - a list containing names of achievements
+     * @return List<AchievementWeb> - the achievements on the given list
+     */
     public List<AchievementWeb> getEarnedAchievements(List<String> achievementTypeList){
         List<AchievementWeb> achievementList = new ArrayList<>();
 
@@ -29,6 +37,11 @@ public class AchievementService {
         return achievementList;
     }
 
+    /**
+     * Picks out the achievements that are not on the given list
+     * @param achievementTypeList - a list containing names of achievements
+     * @return List<AchievementWeb> - the achievements not on the given list
+     */
     public List<AchievementWeb> getUnearnedAchievements(List<String> achievementTypeList){
         List<AchievementWeb> achievementList = new ArrayList<>();
 

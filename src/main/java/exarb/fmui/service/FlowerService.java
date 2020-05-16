@@ -10,6 +10,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * Service fpr handling flowers
+ */
 @Service
 public class FlowerService {
 
@@ -29,8 +32,6 @@ public class FlowerService {
      */
     public List<FlowerWeb> getMeadowFlowers(List<FlowerType> flowerTypeList){
         List<FlowerWeb> flowerList = new ArrayList<>();
-
-        System.out.println("FLowers: " + allFlowersMap);
 
         for (FlowerType flower : flowerTypeList) {
             flowerList.add(allFlowersMap.get(flower));

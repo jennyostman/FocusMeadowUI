@@ -164,7 +164,6 @@ public class WebController {
     @PostMapping("/register")
     public String submitRegistrationForm(@ModelAttribute("userWeb") UserWeb userWeb, Model model) {
         if (userClient.registerNewUser(userWeb) != null){
-            System.out.println("Registreringen lyckades");
             LoginWeb loginWeb = new LoginWeb();
             model.addAttribute("loginWeb", loginWeb);
             return "login";

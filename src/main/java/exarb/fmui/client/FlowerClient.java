@@ -13,6 +13,9 @@ import org.springframework.web.client.RestTemplate;
 
 import java.util.Map;
 
+/**
+ * Client to get everything regarding flowers from backend
+ */
 @Component
 public class FlowerClient {
 
@@ -25,8 +28,8 @@ public class FlowerClient {
         this.userHost = userHost;
     }
 
-    /**Gets all the flowers in the database and returns them as a HashMap
-     *
+    /**
+     * Gets all the flowers in the database and returns them as a HashMap
      * @return Map<FlowerType, FlowerWeb>
      */
     public Map<FlowerType, FlowerWeb> getAllFlowersMap() {
@@ -53,7 +56,9 @@ public class FlowerClient {
     public UserGameData buyFlower(FlowerType flowerType, String userId) {
         UserGameData userGameData = null;
         try {
-            userGameData = restTemplate.postForEntity(userHost + "/flowers/buy/" + flowerType + "/" + userId, null, UserGameData.class).getBody();
+            userGameData = restTemplate.postForEntity(userHost + "/flowers/buy/" + flowerType + "/" + userId,
+                    null,
+                    UserGameData.class).getBody();
         }
         catch (Exception e){
             System.out.println("exception: " + e);

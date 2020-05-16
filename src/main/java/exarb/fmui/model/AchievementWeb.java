@@ -1,5 +1,8 @@
 package exarb.fmui.model;
 
+/**
+ * Model for the achievements containing the information the frontend needs
+ */
 public class AchievementWeb {
 
     private String image;

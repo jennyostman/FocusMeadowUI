@@ -2,6 +2,9 @@ package exarb.fmui.model;
 
 import lombok.Data;
 
+/**
+ * Model for the user containing the information the frontend needs
+ */
 @Data
 public class UserWeb {
 

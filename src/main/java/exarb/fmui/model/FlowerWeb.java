@@ -2,6 +2,9 @@ package exarb.fmui.model;
 
 import exarb.fmui.enums.FlowerType;
 
+/**
+ * Model for the flowers containing the information the frontend needs
+ */
 public class FlowerWeb {
     private String image;
     private String name;
