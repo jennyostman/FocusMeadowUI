@@ -1,7 +1,7 @@
 package exarb.fmui.client.dto;
 
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import exarb.fmui.client.UserGameDataDeserializer;
+import exarb.fmui.client.deserializer.UserGameDataDeserializer;
 import exarb.fmui.enums.FlowerType;
 
 import java.util.List;

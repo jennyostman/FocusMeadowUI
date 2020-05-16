@@ -1,7 +1,7 @@
 package exarb.fmui.client.dto;
 
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import exarb.fmui.client.RegisteredUserDeserializer;
+import exarb.fmui.client.deserializer.RegisteredUserDeserializer;
 
 
 @JsonDeserialize(using = RegisteredUserDeserializer.class)

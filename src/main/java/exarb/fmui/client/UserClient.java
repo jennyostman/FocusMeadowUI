@@ -1,9 +1,11 @@
 package exarb.fmui.client;
 
 import exarb.fmui.client.dto.LoggedInUser;
+import exarb.fmui.client.dto.RegisteredUser;
 import exarb.fmui.client.dto.UserGameData;
 import exarb.fmui.model.LoginWeb;
 import exarb.fmui.model.TimerWeb;
+import exarb.fmui.model.UserWeb;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
@@ -41,6 +43,22 @@ public class UserClient {
         }
 
         return userGameData;
+    }
+
+    /**
+     * Makes a rest post call to the user service with the users registration data
+     * @param userWeb
+     * @return
+     */
+    public RegisteredUser registerNewUser(UserWeb userWeb) {
+        RegisteredUser registeredUser = null;
+        try {
+            registeredUser = restTemplate.postForEntity(userHost + "/users/registration", userWeb, RegisteredUser.class).getBody();
+        }
+        catch (Exception e){
+            System.out.println("exception: " + e);
+        }
+        return registeredUser;
     }
 
     public UserGameData saveTimerSession(TimerWeb timerWeb) {

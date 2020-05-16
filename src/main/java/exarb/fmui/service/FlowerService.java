@@ -30,6 +30,8 @@ public class FlowerService {
     public List<FlowerWeb> getMeadowFlowers(List<FlowerType> flowerTypeList){
         List<FlowerWeb> flowerList = new ArrayList<>();
 
+        System.out.println("FLowers: " + allFlowersMap);
+
         for (FlowerType flower : flowerTypeList) {
             flowerList.add(allFlowersMap.get(flower));
         }
@@ -45,11 +47,13 @@ public class FlowerService {
     public List<FlowerWeb> getShopFlowers(List<FlowerType> flowerTypeList){
         List<FlowerWeb> flowerList = new ArrayList<>();
 
-        allFlowersMap.forEach((k, v) -> {
-            if (!flowerTypeList.contains(k) && k != FlowerType.GRASS && k != FlowerType.PILEOFDIRT){
-                flowerList.add(v);
-            }
-        });
+        if (allFlowersMap != null){
+            allFlowersMap.forEach((k, v) -> {
+                if (!flowerTypeList.contains(k) && k != FlowerType.GRASS && k != FlowerType.PILEOFDIRT){
+                    flowerList.add(v);
+                }
+            });
+        }
 
         return flowerList;
     }
