@@ -26,6 +26,7 @@ public class WebController {
     private final FlowerService flowerService;
     private final AchievementService achievementService;
     private UserGameData userGameData;
+    private List<String> achievedAchievements;
 
     public WebController(UserClient userClient, FlowerService flowerService, AchievementService achievementService) {
         this.userClient = userClient;
@@ -47,10 +48,11 @@ public class WebController {
         model.addAttribute("choosableFlowers", flowerService.getMeadowFlowers(userGameData.getChoosableFlowers()));
         model.addAttribute("shopFlowers", flowerService.getShopFlowers(userGameData.getChoosableFlowers()));
 
-        //TODO get from gamification
-        List<String> achivementList = new ArrayList<>();
-        achivementList.add("hej");
-        model.addAttribute("unearnedAchievements", achievementService.getUnearnedAchievements(achivementList));
+        if (achievedAchievements == null) {
+            achievedAchievements = achievementService.getUsersEarnedAchievementsBackend(userGameData.getUserId());
+        }
+        model.addAttribute("earnedAchievements", achievementService.getEarnedAchievements(achievedAchievements));
+        model.addAttribute("unearnedAchievements", achievementService.getUnearnedAchievements(achievedAchievements));
 
         //TODO get all below from gamelogic
         TimerWeb workTimer = new TimerWeb("userid", 25, SessionType.WORK, null, false);

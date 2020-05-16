@@ -94,6 +94,10 @@ img {
     font-weight: bold;
 }
 
+.unearnedAchievements {
+    opacity: 50%;
+}
+
 
 /**Flowers/Shop**/
 #shopDiv {

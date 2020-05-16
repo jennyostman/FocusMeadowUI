@@ -22,6 +22,10 @@ public class AchievementService {
         allAchievementsMap = achievementClient.getAllAchievementsMap();
     }
 
+    public List<String> getUsersEarnedAchievementsBackend(String userId){
+        return achievementClient.getUsersEarnedAchievements(userId);
+    }
+
     /**
      * Picks out the achievements that ar on the given list
      * @param achievementTypeList - a list containing names of achievements
