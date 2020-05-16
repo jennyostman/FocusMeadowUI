@@ -1,5 +1,7 @@
 package exarb.fmui.event;
 
+import exarb.fmui.controller.WebController;
+import exarb.fmui.service.AchievementService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.amqp.AmqpRejectAndDontRequeueException;
@@ -10,7 +12,13 @@ import org.springframework.stereotype.Component;
 public class EventHandler {
 
     private static final Logger log = LoggerFactory.getLogger(EventHandler.class);
+    private final WebController webController;
+    private final AchievementService achievementService;
 
+    public EventHandler(WebController webController, AchievementService achievementService) {
+        this.webController = webController;
+        this.achievementService = achievementService;
+    }
 
     /**
      * Listens to the achievement queue
@@ -21,7 +29,8 @@ public class EventHandler {
         log.info("Achievement event received: {}", event.getUserAchievementDataId());
         try {
 
-            System.out.println("event.getUserAchievementDataId(): " + event.getUserAchievementDataId());
+            //TODO handle event
+            //webController.achievedAchievements = achievementService.getUsersEarnedAchievementsBackend(webController.userGameData.getUserId());
 
         } catch (final Exception e) {
             log.error("Error when trying to process AchievementEvent", e);
