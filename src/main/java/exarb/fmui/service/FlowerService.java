@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * Service fpr handling flowers
+ * Service for handling flowers
  */
 @Service
 public class FlowerService {
