@@ -10,6 +10,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * Service for handling flowers
+ */
 @Service
 public class FlowerService {
 
@@ -45,11 +48,13 @@ public class FlowerService {
     public List<FlowerWeb> getShopFlowers(List<FlowerType> flowerTypeList){
         List<FlowerWeb> flowerList = new ArrayList<>();
 
-        allFlowersMap.forEach((k, v) -> {
-            if (!flowerTypeList.contains(k) && k != FlowerType.GRASS && k != FlowerType.PILEOFDIRT){
-                flowerList.add(v);
-            }
-        });
+        if (allFlowersMap != null){
+            allFlowersMap.forEach((k, v) -> {
+                if (!flowerTypeList.contains(k) && k != FlowerType.GRASS && k != FlowerType.PILEOFDIRT){
+                    flowerList.add(v);
+                }
+            });
+        }
 
         return flowerList;
     }

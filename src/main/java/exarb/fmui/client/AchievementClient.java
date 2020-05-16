@@ -11,6 +11,9 @@ import org.springframework.web.client.RestTemplate;
 
 import java.util.Map;
 
+/**
+ * Client to get everything regarding achievements from backend
+ */
 @Component
 public class AchievementClient {
 
@@ -33,7 +36,6 @@ public class AchievementClient {
             ObjectMapper mapper = new ObjectMapper();
             JsonNode jsonNode = restTemplate.getForEntity(userHost + "/achievements/all", JsonNode.class).getBody();
             allAchievementsMap = mapper.convertValue(jsonNode, new TypeReference<Map<String, AchievementWeb>>(){});
-            System.out.println("result: " + allAchievementsMap.toString());
         }
         catch (Exception e){
             System.out.println("exception: " + e);

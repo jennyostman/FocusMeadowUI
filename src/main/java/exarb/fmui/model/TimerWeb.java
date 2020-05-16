@@ -3,6 +3,9 @@ package exarb.fmui.model;
 import exarb.fmui.enums.FlowerType;
 import exarb.fmui.enums.SessionType;
 
+/**
+ * Model for the timers containing the information the frontend needs
+ */
 public class TimerWeb {
 
     private String id = null;

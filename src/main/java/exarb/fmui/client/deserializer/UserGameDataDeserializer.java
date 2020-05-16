@@ -1,4 +1,4 @@
-package exarb.fmui.client;
+package exarb.fmui.client.deserializer;
 
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.core.JsonProcessingException;
