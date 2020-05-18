@@ -4,6 +4,7 @@ import exarb.fmui.client.UserClient;
 import exarb.fmui.client.dto.UserGameData;
 import exarb.fmui.enums.FlowerType;
 import exarb.fmui.enums.SessionType;
+import exarb.fmui.event.EventHandler;
 import exarb.fmui.exception.RegistrationException;
 import exarb.fmui.model.*;
 import exarb.fmui.service.AchievementService;
@@ -13,7 +14,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -25,12 +25,15 @@ public class WebController {
     private final UserClient userClient;
     private final FlowerService flowerService;
     private final AchievementService achievementService;
-    private UserGameData userGameData;
+    public UserGameData userGameData;
+    public List<String> achievedAchievements;
+    private final EventHandler eventHandler;
 
     public WebController(UserClient userClient, FlowerService flowerService, AchievementService achievementService) {
         this.userClient = userClient;
         this.flowerService = flowerService;
         this.achievementService = achievementService;
+        this.eventHandler = new EventHandler(this, achievementService);
     }
 
     /**
@@ -47,10 +50,10 @@ public class WebController {
         model.addAttribute("choosableFlowers", flowerService.getMeadowFlowers(userGameData.getChoosableFlowers()));
         model.addAttribute("shopFlowers", flowerService.getShopFlowers(userGameData.getChoosableFlowers()));
 
-        //TODO get from gamification
-        List<String> achivementList = new ArrayList<>();
-        achivementList.add("hej");
-        model.addAttribute("unearnedAchievements", achievementService.getUnearnedAchievements(achivementList));
+        //TODO update on event
+        achievedAchievements = achievementService.getUsersEarnedAchievementsBackend(userGameData.getUserId());
+        model.addAttribute("earnedAchievements", achievementService.getEarnedAchievements(achievedAchievements));
+        model.addAttribute("unearnedAchievements", achievementService.getUnearnedAchievements(achievedAchievements));
 
         //TODO get all below from gamelogic
         TimerWeb workTimer = new TimerWeb("userid", 25, SessionType.WORK, null, false);
@@ -74,6 +77,7 @@ public class WebController {
         userGameData = userClient.saveTimerSession(result);
 
         if (userGameData != null){
+
             return focusMeadow(model);
         }
         else {
@@ -108,6 +112,7 @@ public class WebController {
     @GetMapping(value = "/logout")
     public String logout(Model model) {
         userGameData = null;
+        achievedAchievements = null;
         LoginWeb loginWeb = new LoginWeb();
         model.addAttribute("loginWeb", loginWeb);
         return "login";
